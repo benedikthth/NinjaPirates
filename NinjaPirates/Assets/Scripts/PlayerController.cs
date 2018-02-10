@@ -66,6 +66,23 @@ public class PlayerController : MonoBehaviour {
 		canKick = true;
 	}
 
+	void OnCollisionEnter2D(Collision2D coll){
+	
+		if( po.groundCollider.Contains(coll.collider) ){
+				Debug.Log("wank");
+			currentAirJumps = po.airJumps;
+		}
+
+	}
+
+	void jump(){
+		if(currentAirJumps > 0){
+			currentAirJumps --;
+			rb.AddForce(new Vector2(0, po.jumpHeight));
+		}
+	}
+
+
 	// Update is called once per frame
 	void Update () {
 		
@@ -93,20 +110,8 @@ public class PlayerController : MonoBehaviour {
 				// the player can't kick. check if he can jump instead.
 				else {
 
-					if(bodyCollider.IsTouching(po.groundCollider)){
-						//reset airJumps to max extra jumps.
-						currentAirJumps = po.airJumps;
-						//jump!
-						rb.AddForce(new Vector2(0, po.jumpHeight));
-
-					}  
-					//check if the player still has airJumps left.
-					else if (currentAirJumps > 0){
-						//spend air jump
-						currentAirJumps --;
-						//jump!
-						rb.AddForce(new Vector2(0, po.jumpHeight));
-					} 
+					jump();
+					
 				}
 			}
 

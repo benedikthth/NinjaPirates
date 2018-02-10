@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerOptions : MonoBehaviour {
 
-	public Collider2D groundCollider;
+	public List<Collider2D> groundCollider;
 
 	/// <summary>
 	/// how hard a player should kick.
