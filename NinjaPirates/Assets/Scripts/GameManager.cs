@@ -21,7 +21,10 @@ public class GameManager : MonoBehaviour {
 	/// the textobject declaring either player the winner!
 	/// </summary>
 	public Text winner;
-
+	/// <summary>
+	/// reference to the HUD object.
+	/// </summary>
+	public GameObject HUD;
 
 	/// <summary>
 	/// player scores
@@ -35,11 +38,16 @@ public class GameManager : MonoBehaviour {
 	/// the current game duration
 	/// </summary>
 	public float gameTime;
+	/// <summary>
+	/// is the game over.  
+	/// </summary>
+	public bool gameOver;
 
 	/// <summary>
 	/// Update player score.
 	/// </summary>
 	/// <param name="playerName">String containing the name of player that scored</param>
+	
 	public void Score(string playerName){
 
 		Debug.Log("player: " + playerName + " Scored");
@@ -55,35 +63,39 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		gameOver = false;
 		player1Score = 0;
 		player2Score = 0;
 		gameTime = gameLength;
 	}
 	
 	public void replay(){
+		Debug.Log("OO");
+		Time.timeScale = 1;
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 
 	public void mainMenu(){
-
+		Time.timeScale = 1;
 	}
 
 	void endGame(){
-
+		HUD.SetActive(false);
 		gameOverScreen.SetActive(true);
 		if(player1Score == player2Score){
 			winner.text = "Tie!";
 		} else {
 			winner.text = (player1Score > player2Score)? "Player 1 wins!": "Player 2 wins!"; 
-		}	
+		}
+		
 	}
 
 	// Update is called once per frame
 	void Update () {
 		gameTime -= Time.deltaTime;
 
-		if(gameTime >= gameLength){
-			Time.timeScale = 0;
+		if(gameTime <= 0){
+			gameOver = true;
 			endGame();
 		} 
 

@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// inputs shouldn't register if the player is stunned
-		if(!stunned){
+		if(!stunned && !gm.gameOver){
 
 			// the action key is the kick/jump key. 	
 			if(Input.GetKeyDown(action)){
