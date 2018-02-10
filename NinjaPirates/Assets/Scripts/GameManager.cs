@@ -2,13 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 
-
+	/// <summary>
+	/// Player score displays.
+	/// </summary>
 	public Text player1ScoreText, player2ScoreText;
-
+	/// <summary>
+	/// game clock.
+	/// </summary>
 	public Text clock;
+	/// <summary>
+	/// Reference to the canvas object that displays the winner
+	/// </summary>
+	public GameObject gameOverScreen;
+	/// <summary>
+	/// the textobject declaring either player the winner!
+	/// </summary>
+	public Text winner;
+
 
 	/// <summary>
 	/// player scores
@@ -47,13 +60,33 @@ public class GameManager : MonoBehaviour {
 		gameTime = gameLength;
 	}
 	
+	public void replay(){
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+	}
+
+	public void mainMenu(){
+
+	}
+
+	void endGame(){
+
+		gameOverScreen.SetActive(true);
+		if(player1Score == player2Score){
+			winner.text = "Tie!";
+		} else {
+			winner.text = (player1Score > player2Score)? "Player 1 wins!": "Player 2 wins!"; 
+		}	
+	}
+
 	// Update is called once per frame
 	void Update () {
 		gameTime -= Time.deltaTime;
 
 		if(gameTime >= gameLength){
-			//stop the game.
+			Time.timeScale = 0;
+			endGame();
 		} 
+
 
 		player1ScoreText.text = "Player 1 : " + player1Score;
 
