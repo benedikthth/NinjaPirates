@@ -236,20 +236,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2f3333418b61d4eba23be1d91c60bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  po: {fileID: 806398511}
   leftKickCollider: {fileID: 36728421}
   rightKickController: {fileID: 36728422}
   bodyCollider: {fileID: 36728420}
-  OpponentBodyCollider: {fileID: 0}
-  opponent: {fileID: 0}
+  OpponentBodyCollider: {fileID: 134614926}
+  opponent: {fileID: 134614929}
   velocity: {x: 0, y: 0}
-  groundCollider: {fileID: 1700479015}
-  airJumps: 1
   rb: {fileID: 36728419}
-  runSpeed: 15
-  jumpHeight: 200
   left: 97
   right: 100
   action: 115
+  stunned: 0
+  canKick: 0
 --- !u!4 &36728424
 Transform:
   m_ObjectHideFlags: 0
@@ -257,7 +256,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 36728418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.41, y: 1.7836, z: 0}
+  m_LocalPosition: {x: -4.21, y: 1.7836, z: 0}
   m_LocalScale: {x: 2.532296, y: 2.5322957, z: 2.5322957}
   m_Children:
   - {fileID: 1660022928}
@@ -463,20 +462,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2f3333418b61d4eba23be1d91c60bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  po: {fileID: 806398511}
   leftKickCollider: {fileID: 134614927}
   rightKickController: {fileID: 134614928}
   bodyCollider: {fileID: 134614926}
-  OpponentBodyCollider: {fileID: 0}
-  opponent: {fileID: 0}
+  OpponentBodyCollider: {fileID: 36728420}
+  opponent: {fileID: 36728423}
   velocity: {x: 0, y: 0}
-  groundCollider: {fileID: 1700479015}
-  airJumps: 1
   rb: {fileID: 134614925}
-  runSpeed: 15
-  jumpHeight: 200
   left: 106
   right: 108
   action: 107
+  stunned: 0
+  canKick: 0
 --- !u!4 &134614930
 Transform:
   m_ObjectHideFlags: 0
@@ -704,6 +702,53 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &806398510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 806398512}
+  - component: {fileID: 806398511}
+  m_Layer: 0
+  m_Name: PlayerOptions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &806398511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 806398510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 530c7418bde3fa840ae188207381e3a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCollider: {fileID: 1700479015}
+  kickForce: 500
+  stunDuration: 1.5
+  airJumps: 1
+  runSpeed: 15
+  jumpHeight: 500
+  kickCoolDown: 2
+--- !u!4 &806398512
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 806398510}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.5578979, y: 0.0071425512, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1102959562
 GameObject:
   m_ObjectHideFlags: 0
