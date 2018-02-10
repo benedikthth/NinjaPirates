@@ -1,8 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
+
+
+	public Text player1ScoreText, player2ScoreText;
+
+	public Text clock;
+
 	/// <summary>
 	/// player scores
 	/// </summary>	
@@ -48,8 +55,16 @@ public class GameManager : MonoBehaviour {
 			//stop the game.
 		} 
 
+		player1ScoreText.text = "Player 1 : " + player1Score;
 
+		player2ScoreText.text = "Player 2 : " + player2Score;
 
+		float sec = gameTime % 60;
+		float min = (gameTime - sec) / 60;
+
+		string minutes = (min < 10)? "0"+min : min.ToString();
+		string seconds = (sec - (sec % 1)).ToString();
+		clock.text = minutes + ":" + seconds;
 
 		//update some shit.
 
