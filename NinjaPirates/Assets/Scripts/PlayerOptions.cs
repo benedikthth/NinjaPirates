@@ -30,6 +30,17 @@ public class PlayerOptions : MonoBehaviour {
 	/// how long until a player should wait in between kicks.
 	/// </summary>
 	public float kickCoolDown;
+	/// <summary>
+	/// At which level the player should die and respawn.
+	/// </summary>
+	public float waterLevel;
+
+	/// <summary>
+	/// How long the player should wait until he's revived.
+	/// </summary>
+	public float reviveTimer;
+
+	public Vector3[] playerRespawns;
 
 	// Use this for initialization
 	void Start () {

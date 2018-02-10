@@ -8,26 +8,51 @@ public class PlayerController : MonoBehaviour {
 	/// This is the object that holds all the options the players share.
 	/// </summary>
 	public PlayerOptions po;
+	/// <summary>
+	/// This is the object that keeps the game Loop and score under control.
+	/// </summary>
+	public GameManager gm;
+	/// <summary>
+	/// colliders that detect if you successfully kicked the other player.
+	/// </summary>
 	public Collider2D leftKickCollider, rightKickController;
+	/// <summary>
+	/// your body. get kicked there and you go flying
+	/// </summary>
 	public Collider2D bodyCollider;
-
+	/// <summary>
+	/// a reference to the other players' controller.
+	/// </summary>
 	public Collider2D OpponentBodyCollider;
-
+	/// <summary>
+	/// a reference to your opponents script
+	/// </summary>
 	public PlayerController opponent;
 	public Vector2 velocity;
-	
+	/// <summary>
+	/// the current number of in-air jumps you have
+	/// </summary>	
 	int currentAirJumps;
+
+	/// <summary>
+	/// reference to own rigidbody
+	/// </summary>
 	public Rigidbody2D rb;
-	
+	/// <summary>
+	/// Which keys control your dude.
+	/// </summary>
 	public KeyCode left, right, action;
 
-	
+	/// <summary>
+	/// status booleans
+	/// </summary>
 	public bool stunned, canKick;
 
 	// Use this for initialization
 	void Start () {
 		currentAirJumps = po.airJumps;
 		stunned = false;
+		canKick = true;
 	}
 	
 	/// <summary>
@@ -35,7 +60,9 @@ public class PlayerController : MonoBehaviour {
 	/// </summary>
 	/// <param name="opponentPosition">Vector2 other players position</param>
 	public void kickEvent(Vector2 opponentPosition){
-		
+
+		Debug.Log("shit me, "+name+", got kicked");
+
 		Vector2 kickDirection = (Vector2)this.transform.position - opponentPosition;
 
 		rb.AddForce(kickDirection * po.kickForce);
@@ -66,15 +93,23 @@ public class PlayerController : MonoBehaviour {
 		canKick = true;
 	}
 
+	/// <summary>
+	/// Reset the number of air-jumps this player has left.
+	/// </summary>
+	/// <param name="coll">Collision event.</param>
 	void OnCollisionEnter2D(Collision2D coll){
 	
 		if( po.groundCollider.Contains(coll.collider) ){
-				Debug.Log("wank");
+
 			currentAirJumps = po.airJumps;
+		
 		}
 
 	}
-
+	
+	/// <summary>
+	/// JUMP!
+	/// </summary>
 	void jump(){
 		if(currentAirJumps > 0){
 			currentAirJumps --;
@@ -82,14 +117,41 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// notify the playerOptions that this player has scored.
+	/// </summary>
+	public void Score(){
+		gm.SendMessage("Score", this.name);
+	}
+
+	/// <summary>
+	/// get this player off-screen for some time.
+	/// </summary>
+	/// <returns></returns>
+	IEnumerator resetPlayer(){
+		Debug.Log("resetualizing player");
+		//place player away and don't simulate.
+		this.transform.position = new Vector3(0, 100, 0);
+		rb.bodyType = RigidbodyType2D.Static;
+		//wait for the respawn timer to pass.
+		yield return new WaitForSeconds(po.reviveTimer);
+		//place player randomly on map and simulate.
+		this.transform.position = po.playerRespawns[Random.Range(0, po.playerRespawns.Length-1)];
+		rb.bodyType = RigidbodyType2D.Dynamic;
+
+	}
 
 	// Update is called once per frame
 	void Update () {
 		
 		velocity = rb.velocity;
 
+		if(this.transform.position.y < po.waterLevel){
+			StartCoroutine("resetPlayer");
+			opponent.SendMessage("Score");
+		}
 
-		// inputs
+		// inputs shouldn't register if the player is stunned
 		if(!stunned){
 
 			// the action key is the kick/jump key. 	
@@ -104,6 +166,8 @@ public class PlayerController : MonoBehaviour {
 						canKick = false;
 						StartCoroutine("KickCoolDown");
 						opponent.SendMessage("kickEvent", (Vector2)this.transform.position);
+					} else {
+						Debug.Log("me, " + name + " Cant kick");
 					}
 				
 				}
