@@ -105,10 +105,10 @@ GameObject:
   - component: {fileID: 114932613700704712}
   - component: {fileID: 60120251247473294}
   - component: {fileID: 60725113816204394}
+  - component: {fileID: 60590830062878938}
   - component: {fileID: 58100434548395504}
   - component: {fileID: 50016218604579894}
   - component: {fileID: 212021224640643826}
-  - component: {fileID: 95284614315416592}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -213,10 +213,10 @@ PolygonCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1910878975988460}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -239,13 +239,55 @@ PolygonCollider2D:
       - {x: 0.17763272, y: -0.07818694}
       - {x: 0.20186535, y: 0.005281362}
       - {x: 0.16227216, y: 0.08917212}
---- !u!60 &60725113816204394
+--- !u!60 &60590830062878938
 PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1910878975988460}
   m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.060824282, y: 0.06912592}
+      - {x: 0.032327365, y: 0.08867171}
+      - {x: -0.019577038, y: 0.0898823}
+      - {x: -0.06773573, y: 0.055383056}
+      - {x: -0.17173585, y: 0.13114867}
+      - {x: -0.2488317, y: 0.11988009}
+      - {x: -0.2622441, y: 0.012480019}
+      - {x: -0.23000298, y: -0.07332083}
+      - {x: -0.17130576, y: -0.118007466}
+      - {x: -0.092817225, y: -0.12621208}
+      - {x: -0.0452321, y: -0.08262381}
+      - {x: 0.019884348, y: -0.08556354}
+      - {x: 0.07247229, y: -0.13217863}
+      - {x: 0.18701169, y: -0.108090006}
+      - {x: 0.25925386, y: -0.02995697}
+      - {x: 0.26277775, y: 0.045615014}
+      - {x: 0.24159338, y: 0.11746746}
+      - {x: 0.1714342, y: 0.12883048}
+--- !u!60 &60725113816204394
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1910878975988460}
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -271,23 +313,6 @@ PolygonCollider2D:
       - {x: -0.082666874, y: -0.05102152}
       - {x: -0.097851396, y: -0.0013244264}
       - {x: -0.08672112, y: 0.042216912}
---- !u!95 &95284614315416592
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1910878975988460}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 799c3f2356aac2947ba1e4d4eb50861b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114477887297812854
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -371,10 +396,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   po: {fileID: 0}
   gm: {fileID: 0}
-  leftKickCollider: {fileID: 60725113816204394}
-  rightKickController: {fileID: 60120251247473294}
+  kickCollider: {fileID: 60590830062878938}
   bodyCollider: {fileID: 58100434548395504}
-  OpponentBodyCollider: {fileID: 0}
   opponent: {fileID: 0}
   velocity: {x: 0, y: 0}
   rb: {fileID: 50016218604579894}

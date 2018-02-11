@@ -16,7 +16,8 @@ public class PlayerController : MonoBehaviour {
 	/// <summary>
 	/// colliders that detect if you successfully kicked the other player.
 	/// </summary>
-	public Collider2D leftKickCollider, rightKickController;
+	//public Collider2D leftKickCollider, rightKickController;
+	public Collider2D kickCollider;
 	/// <summary>
 	/// your body. get kicked there and you go flying
 	/// </summary>
@@ -24,7 +25,7 @@ public class PlayerController : MonoBehaviour {
 	/// <summary>
 	/// a reference to the other players' controller.
 	/// </summary>
-	public Collider2D OpponentBodyCollider;
+	Collider2D OpponentBodyCollider;
 	/// <summary>
 	/// a reference to your opponents script
 	/// </summary>
@@ -56,7 +57,13 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+		OpponentBodyCollider = opponent.GetComponent<CircleCollider2D>();
+
 		po = GameObject.Find("GameOptions").GetComponent<PlayerOptions>();
+		
+		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+		
 		currentAirJumps = po.airJumps;
 		stunned = false;
 		canKick = true;
@@ -196,25 +203,23 @@ public class PlayerController : MonoBehaviour {
 
 
 				//prioritize kicks over jumping.
-				if(leftKickCollider.IsTouching(OpponentBodyCollider) || rightKickController.IsTouching(OpponentBodyCollider)){
-					
+				//if(leftKickCollider.IsTouching(OpponentBodyCollider) || rightKickController.IsTouching(OpponentBodyCollider)){
+				if(kickCollider.IsTouching(OpponentBodyCollider) && canKick){	
 					//TODO: decide that if you cant kick, you should jump instead.
-					if(canKick){
-						canKick = false;
-						StartCoroutine("KickCoolDown");
-						currentKickCooldown = po.kickCoolDown;
-						if(opponent.transform.position.x < transform.position.x){
-							//start left kickWind
-							StartCoroutine("leftKick");
-						} else {
-							//start Right kickwind
-							StartCoroutine("rightKick");
-						}
-
-						opponent.SendMessage("kickEvent", (Vector2)this.transform.position);
+					
+					canKick = false;
+					StartCoroutine("KickCoolDown");
+					currentKickCooldown = po.kickCoolDown;
+					if(opponent.transform.position.x < transform.position.x){
+						//start left kickWind
+						StartCoroutine("leftKick");
 					} else {
-						Debug.Log("me, " + name + " Cant kick");
+						//start Right kickwind
+						StartCoroutine("rightKick");
 					}
+
+					opponent.SendMessage("kickEvent", (Vector2)this.transform.position);
+				
 				
 				}
 				// the player can't kick. check if he can jump instead.

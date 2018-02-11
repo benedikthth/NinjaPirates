@@ -488,7 +488,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: K
+  m_Text: I
 --- !u!222 &322936772
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1168,7 +1168,7 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -2486,21 +2486,15 @@ MonoBehaviour:
   po: {fileID: 0}
   groundColliders: []
   gameDuration: 2
-  kickForce: 1000
-  stunDuration: 1.5
+  kickForce: 1500
+  stunDuration: 1
   airJumps: 2
   runSpeed: 10
-  jumpHeight: 250
-  kickCoolDown: 2
+  jumpHeight: 350
+  kickCoolDown: 1.5
   waterLevel: -3.95
   reviveTimer: 1
   playerRespawns: []
-  p1left: 0
-  p1right: 0
-  p1action: 0
-  p2left: 0
-  p2right: 0
-  p2action: 0
 --- !u!224 &2014565008
 RectTransform:
   m_ObjectHideFlags: 0

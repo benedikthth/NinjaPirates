@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour {
 
 	public void mainMenu(){
 		Time.timeScale = 1;
+		Destroy(po.gameObject);
 		SceneManager.LoadScene("Main Menu");
 	}
 
@@ -111,6 +112,9 @@ public class GameManager : MonoBehaviour {
 
 		string minutes = (min < 10)? "0"+min : min.ToString();
 		string seconds = (sec - (sec % 1)).ToString();
+		if(seconds.Length == 1){
+			seconds = "0"+seconds;
+		}
 		clock.text = minutes + ":" + seconds;
 
 		//update some shit.

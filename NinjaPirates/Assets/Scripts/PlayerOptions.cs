@@ -70,19 +70,16 @@ public class PlayerOptions : MonoBehaviour {
                  Destroy (gameObject);
              }
          }
-	}
-
-	public KeyCode p1left, p1right, p1action;
-
-	public KeyCode p2left, p2right, p2action;
-
-	public void setKeyCode(string player, string action,  KeyCode kc){
-
-	}
+		}
 
 	// Use this for initialization
 	void Start () {
-		
+		/* 
+		if(GameObject.Find("GameOptions") != null)
+		{
+			Destroy(this);
+		}
+		*/
 	}
 	
 	// Update is called once per frame
