@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
@@ -48,6 +49,11 @@ public class PlayerController : MonoBehaviour {
 	/// </summary>
 	public bool stunned, canKick;
 
+	/// <summary>
+	/// Indicator to where the player is kicking.
+	/// </summary>
+	public GameObject leftKickWind, rightKickWind;
+
 	// Use this for initialization
 	void Start () {
 		po = GameObject.Find("GameOptions").GetComponent<PlayerOptions>();
@@ -56,6 +62,8 @@ public class PlayerController : MonoBehaviour {
 		canKick = true;
 	}
 	
+	public Text KickCoolDownText;
+
 	/// <summary>
 	/// This gets called once the other player manages to kick you.
 	/// </summary>
@@ -89,8 +97,10 @@ public class PlayerController : MonoBehaviour {
 	/// </summary>
 	/// <returns></returns>
 	IEnumerator KickCoolDown(){
+		KickCoolDownText.gameObject.SetActive(true);
+		canKick = false;
 		yield return new WaitForSeconds(po.kickCoolDown);
-
+		KickCoolDownText.gameObject.SetActive(false);
 		canKick = true;
 	}
 
@@ -141,8 +151,27 @@ public class PlayerController : MonoBehaviour {
 		rb.bodyType = RigidbodyType2D.Dynamic;
 
 	}
+	/// <summary>
+	/// how long a kick should be
+	/// </summary>
+	float kickWindDuration = 0.5f;
+
+	IEnumerator rightKick(){
+		rightKickWind.SetActive(true);
+		yield return new WaitForSeconds(kickWindDuration);
+		rightKickWind.SetActive(false);
+	}
+	IEnumerator leftKick(){
+		leftKickWind.SetActive(true);
+		yield return new WaitForSeconds(kickWindDuration);
+		leftKickWind.SetActive(false);
+	}
+
 
 	// Update is called once per frame
+
+	float currentKickCooldown;
+
 	void Update () {
 		
 		velocity = rb.velocity;
@@ -150,6 +179,13 @@ public class PlayerController : MonoBehaviour {
 		if(this.transform.position.y < po.waterLevel){
 			StartCoroutine("resetPlayer");
 			opponent.SendMessage("Score");
+		}
+
+		currentKickCooldown -= Time.deltaTime;
+
+		if(KickCoolDownText.IsActive()){
+			float x = currentKickCooldown-(currentKickCooldown%0.1f);
+			KickCoolDownText.text = ""+x;
 		}
 
 		// inputs shouldn't register if the player is stunned
@@ -166,6 +202,15 @@ public class PlayerController : MonoBehaviour {
 					if(canKick){
 						canKick = false;
 						StartCoroutine("KickCoolDown");
+						currentKickCooldown = po.kickCoolDown;
+						if(opponent.transform.position.x < transform.position.x){
+							//start left kickWind
+							StartCoroutine("leftKick");
+						} else {
+							//start Right kickwind
+							StartCoroutine("rightKick");
+						}
+
 						opponent.SendMessage("kickEvent", (Vector2)this.transform.position);
 					} else {
 						Debug.Log("me, " + name + " Cant kick");
@@ -192,10 +237,6 @@ public class PlayerController : MonoBehaviour {
 					rb.AddForce(new Vector2(po.runSpeed, 0));
 				}
 			} 
-			// stop the player from running.
-			//if(Input.GetKeyUp(right) || Input.GetKey(left)){
-			//	rb.velocity = new Vector2(0, rb.velocity.y);
-			//}
 
 
 
