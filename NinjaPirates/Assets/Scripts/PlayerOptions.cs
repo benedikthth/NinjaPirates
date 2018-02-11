@@ -8,7 +8,7 @@ public class PlayerOptions : MonoBehaviour {
 	/// <summary>
 	/// list of colliders that count as the ground.
 	/// </summary>
-	public List<Collider2D> groundCollider;
+	public List<Collider2D> groundColliders;
 
 	/// <summary>
 	/// How long one game should be.
@@ -70,6 +70,14 @@ public class PlayerOptions : MonoBehaviour {
                  Destroy (gameObject);
              }
          }
+	}
+
+	public KeyCode p1left, p1right, p1action;
+
+	public KeyCode p2left, p2right, p2action;
+
+	public void setKeyCode(string player, string action,  KeyCode kc){
+
 	}
 
 	// Use this for initialization

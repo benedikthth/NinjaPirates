@@ -2220,9 +2220,9 @@ GameObject:
   - component: {fileID: 1700479016}
   - component: {fileID: 1700479020}
   - component: {fileID: 1700479015}
+  - component: {fileID: 1700479017}
   - component: {fileID: 1700479019}
   - component: {fileID: 1700479018}
-  - component: {fileID: 1700479017}
   m_Layer: 0
   m_Name: ship
   m_TagString: Untagged
@@ -2230,8 +2230,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!68 &1700479015
-EdgeCollider2D:
+--- !u!60 &1700479015
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -2243,14 +2243,27 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   m_Points:
-  - {x: -0.97247696, y: 0.34814113}
-  - {x: -0.5812599, y: 0.34268007}
-  - {x: -0.42186397, y: 0.16093127}
-  - {x: 0.44315907, y: 0.16169277}
-  - {x: 0.6388304, y: 0.3561044}
-  - {x: 1.0439702, y: 0.34503272}
+    m_Paths:
+    - - {x: 0.6389922, y: 0.3525244}
+      - {x: 0.4349086, y: 0.1630466}
+      - {x: -0.4153301, y: 0.1693396}
+      - {x: -0.5757585, y: 0.34578156}
+      - {x: -0.98182184, y: 0.3449098}
+      - {x: -0.98389, y: 0.027826302}
+      - {x: -0.72202396, y: 0.021181924}
+      - {x: -0.56590927, y: -0.16807517}
+      - {x: 1.0212265, y: -0.16398667}
+      - {x: 1.0433521, y: 0.34490982}
 --- !u!4 &1700479016
 Transform:
   m_ObjectHideFlags: 0
@@ -2276,8 +2289,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &1700479017
-EdgeCollider2D:
+--- !u!60 &1700479017
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -2289,12 +2302,23 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   m_Points:
-  - {x: 0.41879037, y: 1.0723882}
-  - {x: 0.77094316, y: 1.0741063}
---- !u!68 &1700479018
-EdgeCollider2D:
+    m_Paths:
+    - - {x: 0.7770485, y: 1.052729}
+      - {x: 0.41655645, y: 1.0522692}
+      - {x: 0.41621336, y: 1.0750588}
+      - {x: 0.77707833, y: 1.0746579}
+--- !u!60 &1700479018
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -2306,12 +2330,23 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   m_Points:
-  - {x: -0.59044933, y: 1.0252072}
-  - {x: -0.23127504, y: 1.0263431}
---- !u!68 &1700479019
-EdgeCollider2D:
+    m_Paths:
+    - - {x: -0.7213762, y: 0.7207317}
+      - {x: -0.09800592, y: 0.7212504}
+      - {x: -0.100166015, y: 0.74378514}
+      - {x: -0.7213869, y: 0.7420255}
+--- !u!60 &1700479019
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -2323,10 +2358,21 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   m_Points:
-  - {x: -0.72016275, y: 0.74246436}
-  - {x: -0.09964597, y: 0.74490273}
+    m_Paths:
+    - - {x: -0.5915899, y: 1.0268886}
+      - {x: -0.23087806, y: 1.0261494}
+      - {x: -0.22967437, y: 1.0046711}
+      - {x: -0.59107006, y: 1.0042124}
 --- !u!114 &1700479020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2633,7 +2679,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1959504616}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1063913020}
+        m_MethodName: mainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1959504616
