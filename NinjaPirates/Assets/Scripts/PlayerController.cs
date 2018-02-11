@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour {
 	/// <param name="coll">Collision event.</param>
 	void OnCollisionEnter2D(Collision2D coll){
 	
-		if( po.groundCollider.Contains(coll.collider) ){
+		if( po.groundColliders.Contains(coll.collider) ){
 
 			currentAirJumps = po.airJumps;
 		
