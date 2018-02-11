@@ -8,6 +8,7 @@ public class RespawnProvider : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		po = GameObject.Find("GameOptions").GetComponent<PlayerOptions>();
 		Transform[] tfs = GetComponentsInChildren<Transform>();
 		po.playerRespawns = new Vector3[tfs.Length];
 		int i = 0;

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 
+	public PlayerOptions po;
+
 	/// <summary>
 	/// Player score displays.
 	/// </summary>
@@ -30,10 +32,6 @@ public class GameManager : MonoBehaviour {
 	/// player scores
 	/// </summary>	
 	public int player1Score, player2Score;
-	/// <summary>
-	/// Length of game.
-	/// </summary>
-	public float gameLength;
 	/// <summary>
 	/// the current game duration
 	/// </summary>
@@ -63,14 +61,16 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+		po = GameObject.Find("GameOptions").GetComponent<PlayerOptions>();
 		gameOver = false;
 		player1Score = 0;
 		player2Score = 0;
-		gameTime = gameLength;
+		gameTime = po.gameDuration;
 	}
 	
 	public void replay(){
-		Debug.Log("OO");
+
 		Time.timeScale = 1;
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}

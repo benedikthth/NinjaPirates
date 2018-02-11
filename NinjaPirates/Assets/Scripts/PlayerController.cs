@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		po = GameObject.Find("GameOptions").GetComponent<PlayerOptions>();
 		currentAirJumps = po.airJumps;
 		stunned = false;
 		canKick = true;

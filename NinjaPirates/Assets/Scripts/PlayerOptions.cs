@@ -1,11 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class PlayerOptions : MonoBehaviour {
 
+	public PlayerOptions po;
+
+	/// <summary>
+	/// list of colliders that count as the ground.
+	/// </summary>
 	public List<Collider2D> groundCollider;
 
+	/// <summary>
+	/// How long one game should be.
+	/// </summary>
+	public int gameDuration = 120;
 	/// <summary>
 	/// how hard a player should kick.
 	/// </summary>
@@ -33,7 +41,7 @@ public class PlayerOptions : MonoBehaviour {
 	/// <summary>
 	/// At which level the player should die and respawn.
 	/// </summary>
-	public float waterLevel;
+	public float waterLevel = -3.95f;
 
 	/// <summary>
 	/// How long the player should wait until he's revived.
@@ -41,6 +49,28 @@ public class PlayerOptions : MonoBehaviour {
 	public float reviveTimer;
 
 	public Vector3[] playerRespawns;
+
+
+	public void setDuration(int x){
+		this.po.gameDuration = 60 * x;
+	}
+
+
+	void Awake(){
+		Singleton();
+	}
+
+	void Singleton(){
+         if(po == null){
+             DontDestroyOnLoad(gameObject);
+             po = this;
+         }
+         else{
+             if(po != this){
+                 Destroy (gameObject);
+             }
+         }
+	}
 
 	// Use this for initialization
 	void Start () {

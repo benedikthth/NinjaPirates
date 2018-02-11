@@ -134,7 +134,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &36728418
 GameObject:
@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2f3333418b61d4eba23be1d91c60bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  po: {fileID: 806398511}
+  po: {fileID: 0}
   gm: {fileID: 1063913020}
   leftKickCollider: {fileID: 36728421}
   rightKickController: {fileID: 36728422}
@@ -590,7 +590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2f3333418b61d4eba23be1d91c60bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  po: {fileID: 806398511}
+  po: {fileID: 0}
   gm: {fileID: 1063913020}
   leftKickCollider: {fileID: 134614927}
   rightKickController: {fileID: 134614928}
@@ -706,7 +706,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &302422678
 GameObject:
@@ -771,7 +771,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 36.294003, y: -6.0210004, z: -28.261002}
 --- !u!1 &346050662
 GameObject:
@@ -1344,7 +1344,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -5.873, y: 0, z: 0}
 --- !u!1 &685317908
 GameObject:
@@ -1488,57 +1488,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!1 &806398510
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 806398512}
-  - component: {fileID: 806398511}
-  m_Layer: 0
-  m_Name: PlayerOptions
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &806398511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 806398510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 530c7418bde3fa840ae188207381e3a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundCollider: []
-  kickForce: 500
-  stunDuration: 1.5
-  airJumps: 2
-  runSpeed: 15
-  jumpHeight: 500
-  kickCoolDown: 2
-  waterLevel: -3.95
-  reviveTimer: 1
-  playerRespawns:
-  - {x: 0, y: 0, z: 0}
---- !u!4 &806398512
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 806398510}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5578979, y: 0.0071425512, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &888569859
 GameObject:
   m_ObjectHideFlags: 0
@@ -1678,13 +1627,13 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4542328110032270, guid: 38b5117538523a14891d2e415340ce89, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114932613700704712, guid: 38b5117538523a14891d2e415340ce89,
         type: 2}
       propertyPath: po
       value: 
-      objectReference: {fileID: 806398511}
+      objectReference: {fileID: 0}
     - target: {fileID: 1910878975988460, guid: 38b5117538523a14891d2e415340ce89, type: 2}
       propertyPath: m_IsActive
       value: 0
@@ -1719,6 +1668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c8c768c8d869246a050b8b38055e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  po: {fileID: 0}
   player1ScoreText: {fileID: 1786223546}
   player2ScoreText: {fileID: 346050664}
   clock: {fileID: 1134349735}
@@ -1727,7 +1677,6 @@ MonoBehaviour:
   HUD: {fileID: 1109015503}
   player1Score: 0
   player2Score: 0
-  gameLength: 10
   gameTime: 0
   gameOver: 0
 --- !u!4 &1063913021
@@ -1741,7 +1690,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1102959562
 GameObject:
@@ -1920,7 +1869,7 @@ RectTransform:
   - {fileID: 498764241}
   - {fileID: 1134349734}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2232,7 +2181,7 @@ RectTransform:
   - {fileID: 1959504614}
   - {fileID: 1866863333}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2608,7 +2557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 039dad3d842d25149a69c051dd3ae730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  po: {fileID: 806398511}
+  po: {fileID: 0}
 --- !u!1 &1786223544
 GameObject:
   m_ObjectHideFlags: 0
@@ -2966,7 +2915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bf781dc32814804f82e5198799c35dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  po: {fileID: 806398511}
+  po: {fileID: 0}
 --- !u!4 &2029856993
 Transform:
   m_ObjectHideFlags: 0
@@ -2983,7 +2932,7 @@ Transform:
   - {fileID: 888569860}
   - {fileID: 176822808}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2048738157
 GameObject:
