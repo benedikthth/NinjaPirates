@@ -20,23 +20,32 @@ public class Game : MonoBehaviour {
         }
     }
 
+    //how many players to spawn
     public int playerCount;
+    //list of player colors, applied in the same order as players.
     public List<Color> playerColor;
 
+    //reference to the playerPrefab, and gameParent used to initilize playerPrefab
     public GameObject playerPrefab;
     public GameObject gameParent;
 
+    //a list of all the player classes 
     private List<Player> player = new List<Player>();
     public List<Player> Player { get { return player; } }
 
+    //a bool to see if the game is paused
     private bool paused;
     public bool Paused { get { return paused; } }
+
+    //a bool to see if the game is over
     private bool gameOver;
     public bool GameOver { get { return gameOver; } }
 
+    //game current and maxDuration
     public int maxDuration = 120;
     private float currentDuration;
 
+    //temporary copy of the respawn position list, (todo: move respawn positions to ship + masts.)
     public List<Vector3> tempRespawnList = new List<Vector3>();
 
     private void Start()
@@ -44,6 +53,7 @@ public class Game : MonoBehaviour {
         StartGame();
     }
 
+    //a function that pauses the game, stops gameTime shows the pauseScreen;
     public void PauseGame()
     {
         paused = !paused;
@@ -60,7 +70,9 @@ public class Game : MonoBehaviour {
         }
     }
 
+    //a reference to the timerTick coroutine, used to interrupt it.
     Coroutine timer;
+    //a coroutine function that ticks down the gameTime, updates the UI for the timer, and if allowed to expire, runs the endGame function.
     IEnumerator TimerTick()
     {
         float currentDuration = maxDuration;
@@ -78,6 +90,7 @@ public class Game : MonoBehaviour {
         EndGame();
     }
 
+    //a function that, discards, and generates new player game objects.
     private void SpawnPlayers()
     {
         for (int i = 0; i < player.Count; i++)
@@ -93,6 +106,8 @@ public class Game : MonoBehaviour {
         }
     }
 
+    //a function that signals the start of a new game.
+    //it resets the ui (score, time), resets bool variables, starts the game timer and spawns new players.
     public void StartGame()
     {
         UIManager.Instance.ResetUI();
@@ -108,6 +123,8 @@ public class Game : MonoBehaviour {
         timer = StartCoroutine(TimerTick());
     }
 
+
+    // a function that signals the end of the game, set gameOver, stop time and show the GameOver UI
     public void EndGame()
     {
         gameOver = true;

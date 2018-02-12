@@ -5,34 +5,43 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour {
 
-    public Rigidbody2D RigidBody { get { return GetComponent<Rigidbody2D>(); } }
-    public Collider2D Collider { get { return GetComponent<PolygonCollider2D>(); } }
+    //getters as shortcuts variables
+    public Rigidbody2D rb { get { return GetComponent<Rigidbody2D>(); } }
+    public Collider2D coll { get { return GetComponent<PolygonCollider2D>(); } }
 
+    //this list keeps track of all current player colliders touching this players attack trigger/colliders.
     private List<Player> collision = new List<Player>();
 
+    //A bool to keep track of if the player is alive atm.
     private bool alive = true;
     public bool Alive { get { return alive; } }
 
+    //A bool to keep track of if the player is stunned atm.
     private bool stunned = false;
     public bool Stunned { get { return stunned; } }
 
+    //A bool to keep track of if the player is jumping (aka freefalling in the air)
     private bool jumping;
     public bool Jumping { get { return jumping; } }
 
+    //this players score
     private int score;
     public int Score { get { return score; } }
 
+    //reference to the sprite renderer.
     public SpriteRenderer playerSprite;
 
+    //Color getter and setter that actually get/set the color of the player sprite.
     public Color Color{ set { playerSprite.color = value;  } get { return playerSprite.color; } }
 
+    //variables and references concerning the kick action.
     float currentKickCooldown = 0;
     float KickCD = 1.5f;
     float kickAnimDuration = 0.5f;
     public GameObject leftKickWind, rightKickWind;
     public UnityEngine.UI.Text kickCoolDownText;
 
-    //oldplayeroptions
+    //old player options
     public float kickForce;
     public float jumpForce;
     public float stunDuration;
@@ -40,15 +49,17 @@ public class Player : MonoBehaviour {
     private int airJumps;
     public float maxRunSpeed;
 
-    public Player killer;
+    //variable that holds the current would be killer, if the player dies with this variable set, the killer get the score.
+    private Player killer;
 
     private void OnTriggerEnter2D(Collider2D target)
     {
+        //if a player enters this players collider/trigger, add the player to collision list.
         if (!target.isTrigger && target.tag == "Player" && !collision.Contains(target.GetComponent<Player>()))
         {
             collision.Add(target.GetComponent<Player>());
         }
-        else if(target.tag == "Ocean")
+        else if(target.tag == "Ocean") //if this player enters a trigger with the tag ocean, then he dies.
         {
             Die();
         }
@@ -56,6 +67,7 @@ public class Player : MonoBehaviour {
 
     private void OnTriggerExit2D(Collider2D target)
     {
+        //if a player leaves this players collider/trigger, remove him from the collision list.
         if (!target.isTrigger && target.tag == "Player" && collision.Contains(target.GetComponent<Player>()))
         {
             collision.Remove(target.GetComponent<Player>());
@@ -64,6 +76,7 @@ public class Player : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D target)
     {
+        //if this player collides with the ship, then he landed.
         if (!target.collider.isTrigger && target.collider.tag == "Ship")
         {
             jumping = false;
@@ -73,18 +86,22 @@ public class Player : MonoBehaviour {
 
     private void OnCollisionExit2D(Collision2D target)
     {
+        //if this player is not colliding with the ship, he is jumping.
         if (!target.collider.isTrigger && target.collider.tag == "Ship")
         {
             jumping = true;
         }
     }
 
+    //coroutine function that displays the kick sprite for kickAnimDuration time.
     IEnumerator rightKick()
     {
         rightKickWind.SetActive(true);
         yield return new WaitForSeconds(kickAnimDuration);
         rightKickWind.SetActive(false);
     }
+
+    //coroutine function that displays the kick sprite for kickAnimDuration time.
     IEnumerator leftKick()
     {
         leftKickWind.SetActive(true);
@@ -92,6 +109,7 @@ public class Player : MonoBehaviour {
         leftKickWind.SetActive(false);
     }
 
+    //coroutine function that displays the kick cooldown above the player for the duration of the cooldown.
     IEnumerator KickCoolDown()
     {
         kickCoolDownText.gameObject.SetActive(true);
@@ -105,6 +123,7 @@ public class Player : MonoBehaviour {
         kickCoolDownText.gameObject.SetActive(false);
     }
 
+    //coroutine function that sets stunned variable, and removes it after "duration"
     IEnumerator ApplyStun(float duration)
     {
         stunned = true;
@@ -112,12 +131,15 @@ public class Player : MonoBehaviour {
         stunned = false;
     }
 
+    //a function that starts the stun process (via coroutines)
     public void Stun()
     {
         StartCoroutine(ApplyStun(stunDuration));
     }
 
+    //reference to the tagKillerCoroutine coroutine, used to interrupt it.
     Coroutine tagKillerCoroutine;
+    //coroutine function that sets the killer tag, if it the player is still alive after 5sec, remove killer tag.
     IEnumerator ApplyKiller(Player murderedBy)
     {
         killer = murderedBy;
@@ -126,6 +148,8 @@ public class Player : MonoBehaviour {
         tagKillerCoroutine = null;
     }
 
+
+    //function that starts the apply killer coroutine
     public void TagKiller(Player murderedBy)
     {
         if(tagKillerCoroutine != null)
@@ -135,6 +159,7 @@ public class Player : MonoBehaviour {
         tagKillerCoroutine = StartCoroutine(ApplyKiller(murderedBy));
     }
 
+    //function that delivers the kick to the player target and sets off visuals/cooldowns.
     public void Kick()
     {
         StartCoroutine("KickCoolDown");
@@ -143,14 +168,14 @@ public class Player : MonoBehaviour {
             if (collision[i].transform.position.x < transform.position.x)
             {
                 //start left kickWind
-                collision[i].RigidBody.AddForce(new Vector2(-kickForce, 0));
+                collision[i].rb.AddForce(new Vector2(-kickForce, 0));
                 StartCoroutine("leftKick");
             }
             else
             {
                 //start Right kickwind
                 StartCoroutine("rightKick");
-                collision[i].RigidBody.AddForce(new Vector2(kickForce, 0));
+                collision[i].rb.AddForce(new Vector2(kickForce, 0));
             }
 
             collision[i].Stun();
@@ -158,15 +183,19 @@ public class Player : MonoBehaviour {
         }
     }
 
+
+    //function that jumps the player if he has jumps left.
     public void Jump()
     {
         if ((!jumping) || (jumping && airJumps > 0))
         {
             airJumps--;
-            RigidBody.AddForce(new Vector2(0, jumpForce));
+            rb.AddForce(new Vector2(0, jumpForce));
         }
     }
 
+    //function that calls the jump/kick functions at the right time.
+    //if player is in range of another player, kick, else jump.
     public void Action()
     {
         if(!stunned && alive)
@@ -182,29 +211,33 @@ public class Player : MonoBehaviour {
         }
     }
 
+    //a function that moves the player to the left
     public void Left()
     {
         if (!stunned && alive)
         {
             //Debug.Log("left");
-            RigidBody.AddForce(new Vector2(-maxRunSpeed, 0));
+            rb.AddForce(new Vector2(-maxRunSpeed, 0));
         }
     }
 
+    //a function that moves the player to the right
     public void Right()
     {
         if (!stunned && alive)
         {
             //Debug.Log("right");
-            RigidBody.AddForce(new Vector2(maxRunSpeed, 0));
+            rb.AddForce(new Vector2(maxRunSpeed, 0));
         }
     }
 
+    //a function that adds 1 to this player's score.
     public void Kill()
     {
         score++;
     }
 
+    // a function that sets the player as dead, gives score to the player's killer, updates the score ui and respawns the player after death.
     public void Die()
     {
         alive = false;
@@ -219,7 +252,7 @@ public class Player : MonoBehaviour {
         }
 
 
-        RigidBody.velocity = new Vector2(0, 0);
+        rb.velocity = new Vector2(0, 0);
         transform.position = Game.Instance.tempRespawnList[Random.Range(0, Game.Instance.tempRespawnList.Count - 1)];
         alive = true;
 

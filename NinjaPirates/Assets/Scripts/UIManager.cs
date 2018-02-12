@@ -20,9 +20,12 @@ public class UIManager : MonoBehaviour {
         }
     }
 
+    //reference variables for various UI elements.
     public UnityEngine.UI.Text gameTimer, p1Score, p2Score, p3Score, p4Score, winnerText;
     public GameObject gameOverScreen, pauseScreen;
 
+
+    //a function that resets the ui that needs resetting.
     public void ResetUI()
     {
         p1Score.text = "0";
@@ -33,11 +36,14 @@ public class UIManager : MonoBehaviour {
         gameOverScreen.SetActive(false);
     }
 
+    //setter function for the timer text.
     public void SetTimer(string text)
     {
         gameTimer.text = text;
     }
 
+
+    //a function that shows the gameOver screen and displays who won the match.
     public void GameOver()
     {
         gameOverScreen.SetActive(true);
@@ -61,6 +67,8 @@ public class UIManager : MonoBehaviour {
         }
     }
 
+
+    //a function that updates score ui with player scores.
     public void UpdateScore()
     {
         p1Score.text = Game.Instance.Player[0].Score.ToString();

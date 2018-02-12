@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class DynamicCamera : MonoBehaviour {
 
-    public List<GameObject> player;
+    //camera position offset
     public Vector3 offset;
     public Vector3 velocity;
     public float smoothTime;
@@ -60,6 +60,7 @@ public class DynamicCamera : MonoBehaviour {
             }
         }
 
-        return Mathf.Clamp(Mathf.Max(bounds.size.x, bounds.size.y+1) , minSize, maxSize);
+        Debug.Log(Mathf.Max(bounds.size.x, bounds.size.y * 1.78f));
+        return Mathf.Clamp(Mathf.Max(bounds.size.x, bounds.size.y * 1.78f) , minSize, maxSize * 1.78f);
     }
 }
