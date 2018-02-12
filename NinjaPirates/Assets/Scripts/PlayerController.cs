@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour {
 		po = GameObject.Find("GameOptions").GetComponent<PlayerOptions>();
 		
 		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-		
+
 		currentAirJumps = po.airJumps;
 		stunned = false;
 		canKick = true;
@@ -116,7 +116,11 @@ public class PlayerController : MonoBehaviour {
 	/// </summary>
 	/// <param name="coll">Collision event.</param>
 	void OnCollisionEnter2D(Collision2D coll){
-	
+
+		if(po==null){
+			return;
+		}
+
 		if( po.groundColliders.Contains(coll.collider) ){
 
 			currentAirJumps = po.airJumps;
@@ -181,6 +185,9 @@ public class PlayerController : MonoBehaviour {
 
 	void Update () {
 		
+		if(po == null){
+			return;
+		}
 		velocity = rb.velocity;
 
 		if(this.transform.position.y < po.waterLevel){

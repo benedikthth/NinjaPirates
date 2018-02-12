@@ -41,6 +41,10 @@ public class GameManager : MonoBehaviour {
 	/// is the game over.  
 	/// </summary>
 	public bool gameOver;
+	/// <summary>
+	/// reference to the pause menu.
+	/// </summary>
+	public GameObject pauseMenu;
 
 	/// <summary>
 	/// Update player score.
@@ -78,7 +82,9 @@ public class GameManager : MonoBehaviour {
 
 	public void mainMenu(){
 		Time.timeScale = 1;
-		Destroy(po.gameObject);
+		if(po != null){
+			Destroy(po.gameObject);
+		}
 		SceneManager.LoadScene("Main Menu");
 	}
 
@@ -95,6 +101,12 @@ public class GameManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+		if(Input.GetKeyDown(KeyCode.Escape)){
+			Time.timeScale = (pauseMenu.activeSelf)?1:0;
+			pauseMenu.SetActive(!pauseMenu.activeSelf);
+		}
+
 		gameTime -= Time.deltaTime;
 
 		if(gameTime <= 0){
