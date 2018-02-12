@@ -60,6 +60,6 @@ public class DynamicCamera : MonoBehaviour {
             }
         }
 
-        return Mathf.Clamp(Mathf.Max(bounds.size.x, bounds.size.y) , minSize, maxSize);
+        return Mathf.Clamp(Mathf.Max(bounds.size.x, bounds.size.y+1) , minSize, maxSize);
     }
 }

@@ -86,7 +86,7 @@ public class Game : MonoBehaviour {
         player.Clear();
         for (int i = 0; i < playerCount; i++)
         {
-            Player p = Instantiate(playerPrefab, new Vector3(2, 0, 0), Quaternion.identity, gameParent.transform).GetComponent<Player>();
+            Player p = Instantiate(playerPrefab, tempRespawnList[i], Quaternion.identity, gameParent.transform).GetComponent<Player>();
             p.Color = playerColor[i];
             player.Add(p);
         }
