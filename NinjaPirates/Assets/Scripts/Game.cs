@@ -47,6 +47,7 @@ public class Game : MonoBehaviour {
     public void PauseGame()
     {
         paused = !paused;
+        UIManager.Instance.pauseScreen.SetActive(paused);
         if (paused)
         {
             //pause

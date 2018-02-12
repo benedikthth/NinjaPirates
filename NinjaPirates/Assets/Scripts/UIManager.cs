@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour {
     }
 
     public UnityEngine.UI.Text gameTimer, p1Score, p2Score, p3Score, p4Score, winnerText;
-    public GameObject gameOverScreen;
+    public GameObject gameOverScreen, pauseScreen;
 
     public void ResetUI()
     {
