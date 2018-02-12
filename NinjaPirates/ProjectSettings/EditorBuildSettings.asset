@@ -11,3 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: fb15e96595dc9ac4a851e6de8d165831
+  - enabled: 1
+    path: Assets/Scenes/BjornMainMenu.unity
+    guid: bda4f646e5eea274fa25cf419b8477a7
+  - enabled: 1
+    path: Assets/Scenes/BjornGame.unity
+    guid: c7a87422eee7d964d9197d3e51e47b84

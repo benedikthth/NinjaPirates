@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour {
 		float sec = gameTime % 60;
 		float min = (gameTime - sec) / 60;
 
-		string minutes = (min < 10)? "0"+min : min.ToString();
+		string minutes = (min < 10) ? "0" + min : min.ToString();
 		string seconds = (sec - (sec % 1)).ToString();
 		if(seconds.Length == 1){
 			seconds = "0"+seconds;

@@ -14,10 +14,11 @@ public class MainMenuManager : MonoBehaviour {
 
 	public Text gameDurationHud;
 
-	public void playGame(){
+	public void playGame(string scene = "Game"){
 		po.setDuration((int)durationSlider.value);
-		SceneManager.LoadScene("Game");
+		SceneManager.LoadScene(scene);
 	}
+
 
 	// Use this for initialization
 	void Start () {

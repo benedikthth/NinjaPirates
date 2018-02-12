@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour {
 
 		po = GameObject.Find("GameOptions").GetComponent<PlayerOptions>();
 		
-		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+		//gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 		
 		currentAirJumps = po.airJumps;
 		stunned = false;
