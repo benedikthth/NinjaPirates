@@ -39,6 +39,7 @@ public class Player : MonoBehaviour {
     float KickCD = 1.5f;
     float kickAnimDuration = 0.5f;
     public GameObject leftKickWind, rightKickWind;
+    public ParticleSystem stun;
     public UnityEngine.UI.Text kickCoolDownText;
 
     //old player options
@@ -127,7 +128,10 @@ public class Player : MonoBehaviour {
     IEnumerator ApplyStun(float duration)
     {
         stunned = true;
+        stun.Play();
+        float currTime = duration;
         yield return new WaitForSeconds(duration);
+        stun.Stop();
         stunned = false;
     }
 
@@ -162,7 +166,7 @@ public class Player : MonoBehaviour {
     //function that delivers the kick to the player target and sets off visuals/cooldowns.
     public void Kick()
     {
-        StartCoroutine("KickCoolDown");
+        //StartCoroutine("KickCoolDown");
         for (int i = 0; i < collision.Count; i++)
         {
             if (collision[i].transform.position.x < transform.position.x)
