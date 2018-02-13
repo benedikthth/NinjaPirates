@@ -32,6 +32,7 @@ public class Player : MonoBehaviour {
 
     //reference to the sprite renderer.
     public SpriteRenderer playerSprite;
+    public SpriteRenderer playerHeadSprite;
 
     //Color getter and setter that actually get/set the color of the player sprite.
     public Color Color{ set { playerSprite.color = value;  } get { return playerSprite.color; } }
@@ -225,6 +226,7 @@ public class Player : MonoBehaviour {
             //Debug.Log("left");
             float x = Mathf.Clamp(rb.velocity.x - (jumping ? .25f : .5f), -10, 10);
             rb.velocity = new Vector2(x, rb.velocity.y);
+            playerHeadSprite.flipX = true;
             //rb.AddForce(new Vector2(-maxRunSpeed, 0));
         }
     }
@@ -237,6 +239,7 @@ public class Player : MonoBehaviour {
             //Debug.Log("right");
             float x = Mathf.Clamp(rb.velocity.x + (jumping ? .25f : .5f), -10, 10);
             rb.velocity = new Vector2(x, rb.velocity.y);
+            playerHeadSprite.flipX = false;
             //rb.AddForce(new Vector2(maxRunSpeed, 0));
         }
     }
