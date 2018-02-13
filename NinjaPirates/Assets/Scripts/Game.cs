@@ -33,6 +33,8 @@ public class Game : MonoBehaviour {
     private List<Player> player = new List<Player>();
     public List<Player> Player { get { return player; } }
 
+    public GameObject ship;
+
     //a bool to see if the game is paused
     private bool paused;
     public bool Paused { get { return paused; } }

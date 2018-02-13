@@ -28,16 +28,7 @@ public class DynamicCamera : MonoBehaviour {
 
     private Vector3 GetCenterPoint()
     {
-        if (Game.Instance.Player.Count == 0)
-        {
-            return new Vector3(0, 0, 0);
-        }
-        else if(Game.Instance.Player.Count == 1)
-        {
-            return Game.Instance.Player[0].transform.position;
-        }
-
-        Bounds bounds = new Bounds(Game.Instance.Player[0].transform.position, Vector3.zero);
+        Bounds bounds = new Bounds(Game.Instance.ship.transform.position, Vector3.zero);
         for(int i = 0; i < 1; i++)
         {
             if (Game.Instance.Player[i].Alive)
@@ -51,7 +42,7 @@ public class DynamicCamera : MonoBehaviour {
 
     private float GetOptimalCameraSize()
     {
-        Bounds bounds = new Bounds(Game.Instance.Player[0].transform.position, Vector3.zero);
+        Bounds bounds = new Bounds(Game.Instance.ship.transform.position, Vector3.zero);
         for (int i = 0; i < Game.Instance.Player.Count; i++)
         {
             if (Game.Instance.Player[i].Alive)
@@ -60,7 +51,6 @@ public class DynamicCamera : MonoBehaviour {
             }
         }
 
-        Debug.Log(Mathf.Max(bounds.size.x, bounds.size.y * 1.78f));
-        return Mathf.Clamp(Mathf.Max(bounds.size.x, bounds.size.y * 1.78f) , minSize, maxSize * 1.78f);
+        return Mathf.Clamp(Mathf.Max(bounds.size.x, bounds.size.y * 1.78f ) * .75f , minSize, maxSize);
     }
 }
