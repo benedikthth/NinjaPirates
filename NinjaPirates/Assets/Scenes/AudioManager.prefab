@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1339707877821678}
+  m_IsPrefabParent: 1
+--- !u!1 &1339707877821678
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4995834699930968}
+  - component: {fileID: 114899421042908714}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4995834699930968
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1339707877821678}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114899421042908714
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1339707877821678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab26cb965e303674da03ccc40c29d33b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnStart: 1
+  audioClip:
+  - name: Attack
+    clip: {fileID: 8300000, guid: fb0e29582a9928846b7383f45631d958, type: 3}
+    volume: 0.1
+    pitch: 0.8
+    loop: 0
+  - name: Jump
+    clip: {fileID: 8300000, guid: 4383da66ddf7f664e9ded65af3f22d4d, type: 3}
+    volume: 0.05
+    pitch: 1.5
+    loop: 0
+  - name: Land
+    clip: {fileID: 8300000, guid: 640b11b289dac4b4aa5dbbaa35c5c380, type: 3}
+    volume: 0.15
+    pitch: 0.7
+    loop: 0
+  - name: Water
+    clip: {fileID: 8300000, guid: 9fba4eb206645814c98961e022c3a724, type: 3}
+    volume: 0.3
+    pitch: 0.75
+    loop: 0
+  musicClip:
+  - name: MainSong
+    clip: {fileID: 8300000, guid: 70ebbcef9935acc4ca27bfef0737a29a, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+  loopMusicList: 0
+  loopCurrentMusic: 0
