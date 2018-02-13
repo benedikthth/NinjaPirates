@@ -38,7 +38,7 @@ public class Player : MonoBehaviour {
     float currentKickCooldown = 0;
     float KickCD = 1.5f;
     float kickAnimDuration = 0.5f;
-    public GameObject leftKickWind, rightKickWind;
+    public GameObject kickWind;
     public ParticleSystem stun;
     public UnityEngine.UI.Text kickCoolDownText;
 
@@ -95,19 +95,11 @@ public class Player : MonoBehaviour {
     }
 
     //coroutine function that displays the kick sprite for kickAnimDuration time.
-    IEnumerator rightKick()
+    IEnumerator KickAnimation()
     {
-        rightKickWind.SetActive(true);
+        kickWind.SetActive(true);
         yield return new WaitForSeconds(kickAnimDuration);
-        rightKickWind.SetActive(false);
-    }
-
-    //coroutine function that displays the kick sprite for kickAnimDuration time.
-    IEnumerator leftKick()
-    {
-        leftKickWind.SetActive(true);
-        yield return new WaitForSeconds(kickAnimDuration);
-        leftKickWind.SetActive(false);
+        kickWind.SetActive(false);
     }
 
     //coroutine function that displays the kick cooldown above the player for the duration of the cooldown.
@@ -169,18 +161,14 @@ public class Player : MonoBehaviour {
         //StartCoroutine("KickCoolDown");
         for (int i = 0; i < collision.Count; i++)
         {
-            if (collision[i].transform.position.x < transform.position.x)
-            {
-                //start left kickWind
-                collision[i].rb.AddForce(new Vector2(-kickForce, 0));
-                StartCoroutine("leftKick");
-            }
-            else
-            {
-                //start Right kickwind
-                StartCoroutine("rightKick");
-                collision[i].rb.AddForce(new Vector2(kickForce, 0));
-            }
+            bool targetLeft = (collision[i].transform.position.x < transform.position.x);
+            collision[i].rb.AddForce((Vector2)(collision[i].transform.position - transform.position).normalized * kickForce);
+            kickWind.transform.LookAt(collision[i].transform);
+            Vector3 pos = kickWind.transform.localScale;
+            kickWind.transform.eulerAngles = new Vector3(0, 0,  (targetLeft ? kickWind.transform.eulerAngles.x + 180 : -kickWind.transform.eulerAngles.x + -180));
+            kickWind.transform.localScale =  new Vector3(targetLeft ? Mathf.Abs(pos.x) : -Mathf.Abs(pos.x), -Mathf.Abs(pos.y), pos.z);
+            
+            StartCoroutine("KickAnimation");
 
             collision[i].Stun();
             collision[i].TagKiller(this);
@@ -262,6 +250,7 @@ public class Player : MonoBehaviour {
 
 
         rb.velocity = new Vector2(0, 0);
+        stun.Stop();
         transform.position = Game.Instance.tempRespawnList[Random.Range(0, Game.Instance.tempRespawnList.Count - 1)];
         alive = true;
 
