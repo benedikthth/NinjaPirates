@@ -9,6 +9,8 @@ public class Player : MonoBehaviour {
     public Rigidbody2D rb { get { return GetComponent<Rigidbody2D>(); } }
     public Collider2D coll { get { return GetComponent<PolygonCollider2D>(); } }
 
+    public GameObject splash;
+
     //this list keeps track of all current player colliders touching this players attack trigger/colliders.
     private List<Player> collision = new List<Player>();
 
@@ -63,6 +65,10 @@ public class Player : MonoBehaviour {
         }
         else if(target.tag == "Ocean") //if this player enters a trigger with the tag ocean, then he dies.
         {
+            //instantiate a splash.
+            GameObject sp = GameObject.Instantiate(splash);
+            sp.transform.position = this.transform.position;
+
             Die();
         }
     }
