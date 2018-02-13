@@ -49,18 +49,21 @@ public class AudioManager : MonoBehaviour
     Coroutine music = null;
     public IEnumerator PlayMusic(int index = 0)
     {
-        musicPlayingIndex = index;
-        do
+        if(!(index > musicClip.Length-1))
         {
-            musicPlaying = musicClip[musicPlayingIndex];
-            musicPlaying.Source.Play();
-            yield return new WaitForSeconds(musicPlaying.clip.length);
-            if (!loopCurrentMusic)
+            musicPlayingIndex = index;
+            do
             {
-                musicPlayingIndex = musicPlayingIndex == musicClip.Length - 1 ? 0 : musicPlayingIndex + 1;
+                musicPlaying = musicClip[musicPlayingIndex];
+                musicPlaying.Source.Play();
+                yield return new WaitForSeconds(musicPlaying.clip.length);
+                if (!loopCurrentMusic)
+                {
+                    musicPlayingIndex = musicPlayingIndex == musicClip.Length - 1 ? 0 : musicPlayingIndex + 1;
+                }
             }
+            while (loopMusicList);
         }
-        while (loopMusicList);
     }
 
     public void StopMusic()
