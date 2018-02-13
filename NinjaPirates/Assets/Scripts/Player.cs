@@ -4,6 +4,8 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour {
+    //Checks if player is standing on ship
+    private bool inAir = false;
 
     //getters as shortcuts variables
     public Rigidbody2D rb { get { return GetComponent<Rigidbody2D>(); } }
@@ -62,6 +64,7 @@ public class Player : MonoBehaviour {
         }
         else if(target.tag == "Ocean") //if this player enters a trigger with the tag ocean, then he dies.
         {
+            AudioManager.Instance.PlayAudioClip("Water");
             Die();
         }
     }
@@ -82,6 +85,10 @@ public class Player : MonoBehaviour {
         {
             jumping = false;
             airJumps = maxAirJumps;
+            if (inAir) {
+                AudioManager.Instance.PlayAudioClip("Land");
+                inAir = false;
+            }
         }
     }
 
@@ -174,12 +181,14 @@ public class Player : MonoBehaviour {
                 //start left kickWind
                 collision[i].rb.AddForce(new Vector2(-kickForce, 0));
                 StartCoroutine("leftKick");
+                AudioManager.Instance.PlayAudioClip("Attack");
             }
             else
             {
                 //start Right kickwind
                 StartCoroutine("rightKick");
                 collision[i].rb.AddForce(new Vector2(kickForce, 0));
+                AudioManager.Instance.PlayAudioClip("Attack");
             }
 
             collision[i].Stun();
@@ -196,6 +205,8 @@ public class Player : MonoBehaviour {
             airJumps--;
             rb.velocity = new Vector2(rb.velocity.x/2, (jumping ? 8 : 10));
             //rb.AddForce(new Vector2(0, jumpForce));
+            AudioManager.Instance.PlayAudioClip("Jump");
+            inAir = true;
         }
     }
 
