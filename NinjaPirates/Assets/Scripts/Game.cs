@@ -112,6 +112,7 @@ public class Game : MonoBehaviour {
     //it resets the ui (score, time), resets bool variables, starts the game timer and spawns new players.
     public void StartGame()
     {
+        Debug.Log("wat");
         UIManager.Instance.ResetUI();
         paused = false;
         Time.timeScale = 1;
