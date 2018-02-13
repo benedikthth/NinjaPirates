@@ -13,6 +13,8 @@ public class MainMenuManager : MonoBehaviour {
 
     private AsyncOperation async;
 
+    public string gameSceneName;
+
 
     IEnumerator LoadScene(string scene)
     {
@@ -40,8 +42,9 @@ public class MainMenuManager : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    public void playGame(string scene = "BjornGame"){
-        StartCoroutine(LoadScene(scene));
+    public void playGame(){
+        string defaultGameScene = "Game";
+        StartCoroutine(LoadScene(gameSceneName != string.Empty ? gameSceneName : defaultGameScene));
     }
 
 	// Use this for initialization
