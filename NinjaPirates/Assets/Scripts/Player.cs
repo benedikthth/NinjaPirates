@@ -4,8 +4,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour {
-    //Checks if player is standing on ship
-    private bool inAir = false;
 
     //getters as shortcuts variables
     public Rigidbody2D rb { get { return GetComponent<Rigidbody2D>(); } }
@@ -84,12 +82,17 @@ public class Player : MonoBehaviour {
         //if this player collides with the ship, then he landed.
         if (!target.collider.isTrigger && target.collider.tag == "Ship")
         {
+            if (jumping)
+            {
+                AudioManager.Instance.PlayAudioClip("Land");
+            }
+            if(validateJumpCoroutine != null)
+            {
+                StopCoroutine(validateJumpCoroutine);
+                validateJumpCoroutine = null;
+            }
             jumping = false;
             airJumps = maxAirJumps;
-            if (inAir) {
-                AudioManager.Instance.PlayAudioClip("Land");
-                inAir = false;
-            }
         }
     }
 
@@ -98,8 +101,17 @@ public class Player : MonoBehaviour {
         //if this player is not colliding with the ship, he is jumping.
         if (!target.collider.isTrigger && target.collider.tag == "Ship")
         {
-            jumping = true;
+            validateJumpCoroutine = StartCoroutine(ValidateJump());
+            ValidateJump();
         }
+    }
+
+    Coroutine validateJumpCoroutine;
+    //coroutine function that sets stunned variable, and removes it after "duration"
+    IEnumerator ValidateJump()
+    {
+        yield return new WaitForSeconds(0.15f);
+        jumping = true;
     }
 
     //coroutine function that displays the kick sprite for kickAnimDuration time.
@@ -197,7 +209,6 @@ public class Player : MonoBehaviour {
             rb.velocity = new Vector2(rb.velocity.x/2, (jumping ? 8 : 10));
             //rb.AddForce(new Vector2(0, jumpForce));
             AudioManager.Instance.PlayAudioClip("Jump");
-            inAir = true;
         }
     }
 
