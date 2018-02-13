@@ -4,8 +4,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour {
-    //Checks if player is standing on ship
-    private bool inAir = false;
 
     //getters as shortcuts variables
     public Rigidbody2D rb { get { return GetComponent<Rigidbody2D>(); } }
@@ -66,16 +64,11 @@ public class Player : MonoBehaviour {
             collision.Add(target.GetComponent<Player>());
         }
         else if(target.tag == "Ocean") //if this player enters a trigger with the tag ocean, then he dies.
-<<<<<<< HEAD
         {
             //instantiate a splash.
             GameObject sp = GameObject.Instantiate(splash);
             sp.transform.position = this.transform.position;
 
-=======
-        {
-            AudioManager.Instance.PlayAudioClip("Water");
->>>>>>> master
             Die();
         }
     }
@@ -96,10 +89,6 @@ public class Player : MonoBehaviour {
         {
             jumping = false;
             airJumps = maxAirJumps;
-            if (inAir) {
-                AudioManager.Instance.PlayAudioClip("Land");
-                inAir = false;
-            }
         }
     }
 
@@ -173,24 +162,20 @@ public class Player : MonoBehaviour {
         tagKillerCoroutine = StartCoroutine(ApplyKiller(murderedBy));
     }
 
-
-
     //function that delivers the kick to the player target and sets off visuals/cooldowns.
     public void Kick()
     {
         //StartCoroutine("KickCoolDown");
         for (int i = 0; i < collision.Count; i++)
         {
-
             bool targetLeft = (collision[i].transform.position.x < transform.position.x);
             collision[i].rb.AddForce((Vector2)(collision[i].transform.position - transform.position).normalized * kickForce);
             kickWind.transform.LookAt(collision[i].transform);
             Vector3 pos = kickWind.transform.localScale;
-            kickWind.transform.eulerAngles = new Vector3(0, 0, (targetLeft ? kickWind.transform.eulerAngles.x + 180 : -kickWind.transform.eulerAngles.x + -180));
-            kickWind.transform.localScale = new Vector3(targetLeft ? Mathf.Abs(pos.x) : -Mathf.Abs(pos.x), -Mathf.Abs(pos.y), pos.z);
-
+            kickWind.transform.eulerAngles = new Vector3(0, 0,  (targetLeft ? kickWind.transform.eulerAngles.x + 180 : -kickWind.transform.eulerAngles.x + -180));
+            kickWind.transform.localScale =  new Vector3(targetLeft ? Mathf.Abs(pos.x) : -Mathf.Abs(pos.x), -Mathf.Abs(pos.y), pos.z);
+            
             StartCoroutine("KickAnimation");
-            AudioManager.Instance.PlayAudioClip("Attack");
 
             collision[i].Stun();
             collision[i].TagKiller(this);
@@ -206,8 +191,6 @@ public class Player : MonoBehaviour {
             airJumps--;
             rb.velocity = new Vector2(rb.velocity.x/2, (jumping ? 8 : 10));
             //rb.AddForce(new Vector2(0, jumpForce));
-            AudioManager.Instance.PlayAudioClip("Jump");
-            inAir = true;
         }
     }
 
