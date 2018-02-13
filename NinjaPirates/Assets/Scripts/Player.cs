@@ -190,7 +190,8 @@ public class Player : MonoBehaviour {
         if ((!jumping) || (jumping && airJumps > 0))
         {
             airJumps--;
-            rb.AddForce(new Vector2(0, jumpForce));
+            rb.velocity = new Vector2(rb.velocity.x/2, (jumping ? 8 : 10));
+            //rb.AddForce(new Vector2(0, jumpForce));
         }
     }
 
@@ -217,7 +218,9 @@ public class Player : MonoBehaviour {
         if (!stunned && alive)
         {
             //Debug.Log("left");
-            rb.AddForce(new Vector2(-maxRunSpeed, 0));
+            float x = Mathf.Clamp(rb.velocity.x - (jumping ? .25f : .5f), -10, 10);
+            rb.velocity = new Vector2(x, rb.velocity.y);
+            //rb.AddForce(new Vector2(-maxRunSpeed, 0));
         }
     }
 
@@ -227,7 +230,9 @@ public class Player : MonoBehaviour {
         if (!stunned && alive)
         {
             //Debug.Log("right");
-            rb.AddForce(new Vector2(maxRunSpeed, 0));
+            float x = Mathf.Clamp(rb.velocity.x + (jumping ? .25f : .5f), -10, 10);
+            rb.velocity = new Vector2(x, rb.velocity.y);
+            //rb.AddForce(new Vector2(maxRunSpeed, 0));
         }
     }
 
