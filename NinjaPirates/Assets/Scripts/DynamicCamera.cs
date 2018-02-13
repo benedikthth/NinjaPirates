@@ -28,7 +28,7 @@ public class DynamicCamera : MonoBehaviour {
 
     private Vector3 GetCenterPoint()
     {
-        Bounds bounds = new Bounds(Game.Instance.ship.transform.position, Vector3.zero);
+        Bounds bounds = new Bounds(Game.Instance.Player[1].transform.position, Vector3.zero);
         for(int i = 0; i < 1; i++)
         {
             if (Game.Instance.Player[i].Alive)
