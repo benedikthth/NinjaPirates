@@ -62,8 +62,13 @@ public class PlayerController : MonoBehaviour {
 
 		po = GameObject.Find("GameOptions").GetComponent<PlayerOptions>();
 		
+<<<<<<< HEAD
 		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+=======
+		//gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 		
+>>>>>>> bjornBranch
 		currentAirJumps = po.airJumps;
 		stunned = false;
 		canKick = true;
@@ -116,7 +121,11 @@ public class PlayerController : MonoBehaviour {
 	/// </summary>
 	/// <param name="coll">Collision event.</param>
 	void OnCollisionEnter2D(Collision2D coll){
-	
+
+		if(po==null){
+			return;
+		}
+
 		if( po.groundColliders.Contains(coll.collider) ){
 
 			currentAirJumps = po.airJumps;

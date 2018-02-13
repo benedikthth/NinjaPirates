@@ -3,29 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class MainMenuManager : MonoBehaviour {
 	
-	/// <summary>
-	/// Player Options.
-	/// </summary>	
-	public PlayerOptions po;	
 	public Slider durationSlider;
 
 	public Text gameDurationHud;
 
-	public void playGame(){
-		po.setDuration((int)durationSlider.value);
-		SceneManager.LoadScene("Game");
-	}
+    private AsyncOperation async;
+
+
+    IEnumerator LoadScene(string scene)
+    {
+        if (scene == "")
+            yield break;
+        Scene asyncScene = SceneManager.GetSceneByName(scene);
+        async = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+
+        Debug.Log("start loading");
+
+        while (!async.isDone)
+        {
+            yield return null;
+        }
+
+        async = SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+        while (!async.isDone)
+        {
+            yield return null;
+        }
+
+        List<GameObject> list = new List<GameObject>(SceneManager.GetActiveScene().GetRootGameObjects());
+        Game game = list.FirstOrDefault(o => o.name == "Manager").GetComponentInChildren<Game>();
+        game.SetDuration((int)durationSlider.value * 60);
+        Destroy(gameObject);
+    }
+
+    public void playGame(string scene = "BjornGame"){
+        StartCoroutine(LoadScene(scene));
+    }
 
 	// Use this for initialization
-	void Start () {
-		po = GameObject.Find("GameOptions").GetComponent<PlayerOptions>();
-	}
+	void Awake () {
+        DontDestroyOnLoad(gameObject);
+        SliderChange();
+    }
 	
-	// Update is called once per frame
-	void Update () {
+	public void SliderChange () {
 		gameDurationHud.text = "Game Length: " + durationSlider.value + " minutes";
 	}
 }
