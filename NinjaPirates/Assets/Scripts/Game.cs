@@ -134,4 +134,14 @@ public class Game : MonoBehaviour {
         UIManager.Instance.GameOver();
     }
 
+    public void SetDuration(int duration)
+    {
+        maxDuration = duration;
+        if (timer != null)
+        {
+            StopCoroutine(timer);
+        }
+        timer = StartCoroutine(TimerTick());
+    }
+
 }
