@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour {
     }
 
     //reference variables for various UI elements.
-    public UnityEngine.UI.Text gameTimer, p1Score, p2Score, p3Score, p4Score, winnerText;
+    public UnityEngine.UI.Text gameTimer, p1Score, p2Score, p3Score, p4Score, winnerText, countDownText;
     public GameObject gameOverScreen, pauseScreen;
 
 
@@ -34,6 +34,7 @@ public class UIManager : MonoBehaviour {
         p4Score.text = "0";
 
         gameOverScreen.SetActive(false);
+        pauseScreen.SetActive(false);
     }
 
     //setter function for the timer text.

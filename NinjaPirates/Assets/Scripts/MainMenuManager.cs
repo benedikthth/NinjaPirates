@@ -43,7 +43,7 @@ public class MainMenuManager : MonoBehaviour {
     }
 
     public void playGame(){
-        string defaultGameScene = "Game";
+        string defaultGameScene = "BjornGame";
         StartCoroutine(LoadScene(gameSceneName != string.Empty ? gameSceneName : defaultGameScene));
     }
 

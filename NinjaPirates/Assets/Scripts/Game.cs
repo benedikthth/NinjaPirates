@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour {
 
@@ -43,8 +44,9 @@ public class Game : MonoBehaviour {
     private bool gameOver;
     public bool GameOver { get { return gameOver; } }
 
-    //game current and maxDuration
+    //game currentDuration, maxDuration & countdown time
     public int maxDuration = 120;
+    public float countDown = 3;
     private float currentDuration;
 
     //temporary copy of the respawn position list, (todo: move respawn positions to ship + masts.)
@@ -52,7 +54,7 @@ public class Game : MonoBehaviour {
 
     private void Start()
     {
-        StartGame();
+        StartCoroutine(startGameWithCountDown(countDown));
     }
 
     //a function that pauses the game, stops gameTime shows the pauseScreen;
@@ -92,14 +94,18 @@ public class Game : MonoBehaviour {
         EndGame();
     }
 
-    //a function that, discards, and generates new player game objects.
-    private void SpawnPlayers()
+    public void clearPlayerList()
     {
         for (int i = 0; i < player.Count; i++)
         {
             Destroy(player[i].gameObject);
         }
         player.Clear();
+    }
+
+    //a function that, discards, and generates new player game objects.
+    private void SpawnPlayers()
+    {
         for (int i = 0; i < playerCount; i++)
         {
             Player p = Instantiate(playerPrefab, tempRespawnList[i], Quaternion.identity, gameParent.transform).GetComponent<Player>();
@@ -108,22 +114,44 @@ public class Game : MonoBehaviour {
         }
     }
 
+    IEnumerator startGameWithCountDown(float duration)
+    {
+        float currTime = duration;
+        while (currTime > 0)
+        {
+            UIManager.Instance.countDownText.text = currTime.ToString();
+            yield return new WaitForSeconds(1f);
+            currTime--;
+        }
+        UIManager.Instance.countDownText.text = "";
+        StartGame(false);
+    }
+
     //a function that signals the start of a new game.
     //it resets the ui (score, time), resets bool variables, starts the game timer and spawns new players.
-    public void StartGame()
+    public void StartGame(bool withCountDown = true)
     {
-        Debug.Log("wat");
-        UIManager.Instance.ResetUI();
-        paused = false;
-        Time.timeScale = 1;
-        gameOver = false;
-        SpawnPlayers();
-
         if (timer != null)
         {
             StopCoroutine(timer);
         }
-        timer = StartCoroutine(TimerTick());
+
+        UIManager.Instance.ResetUI();
+        paused = false;
+        Time.timeScale = 1;
+        gameOver = true;
+        clearPlayerList();
+
+        if (!withCountDown)
+        {
+            gameOver = false;
+            timer = StartCoroutine(TimerTick());
+            SpawnPlayers();
+        }
+        else
+        {
+            StartCoroutine(startGameWithCountDown(countDown));
+        }
     }
 
 
@@ -142,7 +170,17 @@ public class Game : MonoBehaviour {
         {
             StopCoroutine(timer);
         }
-        timer = StartCoroutine(TimerTick());
+        //timer = StartCoroutine(TimerTick());
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("BjornMainMenu");
     }
 
 }

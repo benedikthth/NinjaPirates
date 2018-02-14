@@ -33,7 +33,7 @@ public class InputManager : MonoBehaviour {
             Game.Instance.PauseGame();
         }
         //if game is not over and is not paused.
-        if (!Game.Instance.Paused && !Game.Instance.GameOver)
+        if (!Game.Instance.Paused && !Game.Instance.GameOver && Game.Instance.Player.Count > 0)
         {
             for (int i = 0; i < playerControl.Count; i++)
             {

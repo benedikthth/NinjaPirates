@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
     //getters as shortcuts variables
     public Rigidbody2D rb { get { return GetComponent<Rigidbody2D>(); } }
     public Collider2D coll { get { return GetComponent<PolygonCollider2D>(); } }
+    public TrailRenderer trailRend { get { return GetComponent<TrailRenderer>(); } }
 
     public GameObject splash;
 
@@ -270,7 +271,8 @@ public class Player : MonoBehaviour {
     public void Die()
     {
         alive = false;
-        if(killer != null)
+        trailRend.Clear();
+        if (killer != null)
         {
             killer.Kill();
             killer = null;

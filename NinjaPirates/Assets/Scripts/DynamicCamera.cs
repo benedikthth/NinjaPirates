@@ -22,8 +22,11 @@ public class DynamicCamera : MonoBehaviour {
 
     private void LateUpdate()
     {
-        transform.position = Vector3.SmoothDamp(transform.position, GetCenterPoint() + offset, ref velocity, smoothTime);
-        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, GetOptimalCameraSize(), Time.deltaTime*2);
+        if(Game.Instance.Player.Count != 0)
+        {
+            transform.position = Vector3.SmoothDamp(transform.position, GetCenterPoint() + offset, ref velocity, smoothTime);
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, GetOptimalCameraSize(), Time.deltaTime * 2);
+        }
     }
 
     private Vector3 GetCenterPoint()
